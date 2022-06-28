@@ -1,0 +1,10 @@
+var gl = new Tivi("VTV3", 30);
+var remote = new Remote(12345);
+remote.open(gl);
+remote.upVol(gl);
+console.log(gl.status);
+console.log(gl.getVol());
+remote.nextChanel(gl);
+console.log(gl.getChanel());
+remote.close(gl);
+console.log(gl.status);

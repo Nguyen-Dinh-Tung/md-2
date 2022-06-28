@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    #container {
+      position: absolute;
+      width: 1900px;
+      height: 900px;
+      margin: 0 10px;
+    }
+    #container {
+      border: 1px solid rgb(11, 100, 104);
+    }
+    #main {
+      width: 1900px;
+      height: 170px;
+    }
+    .imd_obstacel {
+      margin: 5px;
+    }
+    #img_bar {
+      display: inline-block;
+    }
+  </style>
+  <body onload="onloadKey()" scroll="no">
+    <div id="container">
+      <div id="main">
+        <!-- <img
+          class="imd_obstacel"
+          style="width: ; height: "
+          src="/img/obstac.jpg"
+        /> -->
+      </div>
+      <img id="img_ball" src="/img/ball.png" style="position: relative" />
+    </div>
+    <img id="img_bar" src="/img/bar.png" style="position: relative" />
+  </body>
+  <script src="/js/obstacle.js"></script>
+  <script src="/js/bar.js"></script>
+  <script src="/js/ballrandom.js"></script>
+  <script src="/js/main.js"></script>
+</html>
