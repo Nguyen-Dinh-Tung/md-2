@@ -10,8 +10,11 @@ const inventory = [
   { type: "machine", value: 77 },
 ];
 
-let total = 0;
-inventory.forEach((item) => {
-  total += item.value;
-});
-console.log(total);
+function sum(inventory) {
+  let total = 0;
+  inventory.forEach((element) => {
+    total += element.value;
+  });
+  return total;
+}
+console.log(sum(inventory));
