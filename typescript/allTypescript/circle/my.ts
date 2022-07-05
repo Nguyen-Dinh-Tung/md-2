@@ -8,7 +8,7 @@ let one = new Circle(9)
 let two = new Circle(20)
 
 
-function prize(one:Circle,two:Circle,d:number){
+function prize(one,two,d:number){
   let distance = Math.pow(one.radius - two.radius,2) + Math.pow(d,2)
   return Math.sqrt(distance)
 }
