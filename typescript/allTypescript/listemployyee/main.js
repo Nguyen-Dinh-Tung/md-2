@@ -1,0 +1,11 @@
+"use strict";
+exports.__esModule = true;
+var employee_1 = require("./employee");
+var listemployee_1 = require("./listemployee");
+var it = new employee_1.Employee(0, 'Nguyễn Đình', 'Tùng', '14/02/1998', 'Thanh Hóa', 'Nhân viên');
+var itt = new employee_1.Employee(1, 'Nguyễn Đình', 'Tùng', '14/02/1998', 'Thanh Hóa', 'Nhân viên');
+var app = new listemployee_1.ListEmployee();
+app.addEmployee(it);
+app.addEmployee(itt);
+app.editEmployee(3, new employee_1.Employee(0, 'adb', 'Tùng', '14/02/1998', 'Thanh Hóa', 'Nhân viên'));
+console.log(app.renderListEmployee());
