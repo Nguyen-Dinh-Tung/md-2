@@ -1,9 +1,10 @@
 "use strict";
 exports.__esModule = true;
 var linkedList_1 = require("./linkedList");
-var linkedList = new linkedList_1.LinkedList();
-linkedList.insertFirstNode('Tung', 25);
-linkedList.insertFirstNode('ád', 23);
-linkedList.insertFirstNode('ádđ', 25);
-linkedList.insertFirstNode('ttter', 68);
-console.log(linkedList.readList());
+var list = new linkedList_1.List();
+list.addFristNode('Tung', 8);
+list.addFristNode('Tung', 5);
+list.addFristNode('Tung', 2);
+list.addFristNode('Phich', 9);
+console.log(list.readList());
+console.log(list.totalStudentsFail());

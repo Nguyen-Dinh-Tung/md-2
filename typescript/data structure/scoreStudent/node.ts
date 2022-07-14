@@ -10,7 +10,10 @@ export class Node <T> {
     this.score = score ;
   }
   readData(): any{
-    return 'Name : ' + this.name + " Score : " +this.score
+    return {
+      name : this.name,
+      score : this.score
+    }
   }
 
 }

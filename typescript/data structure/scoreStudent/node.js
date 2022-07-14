@@ -7,7 +7,10 @@ var Node = /** @class */ (function () {
         this.score = score;
     }
     Node.prototype.readData = function () {
-        return 'Name : ' + this.name + " Score : " + this.score;
+        return {
+            name: this.name,
+            score: this.score
+        };
     };
     return Node;
 }());
