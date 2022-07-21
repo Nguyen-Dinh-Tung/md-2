@@ -1,7 +1,21 @@
 
 export class Student {
 
-  private _name: string;
+   _name: string;
+   _age: number;
+   _date: string;
+   _email: string;
+   _group: string;
+
+   constructor(name : string , age : number , date : string , email : string , group : string){
+    this._name = name ;
+    this._age = age ;
+    this._date = date ;
+    this._email = email ;
+    this._group = group ;
+  }
+
+
   protected get name(): string {
     return this._name;
   }
@@ -9,15 +23,13 @@ export class Student {
     this._name = value;
   }
 
-  private _age: number;
-  protected get age(): number {
+  public getAge(): number {
     return this._age;
   }
   protected set age(value: number) {
     this._age = value;
   }
 
-  private _date: string;
   protected get date(): string {
     return this._date;
   }
@@ -25,7 +37,6 @@ export class Student {
     this._date = value;
   }
 
-  private _email: string;
   protected get email(): string {
     return this._email;
   }
@@ -33,7 +44,6 @@ export class Student {
     this._email = value;
   }
 
-  private _group: string;
   protected get group(): string {
     return this._group;
   }
@@ -41,12 +51,6 @@ export class Student {
     this._group = value;
   }
 
-  constructor(name : string , age : number , date : string , email : string , group : string){
-    this._name = name ;
-    this._age = age ;
-    this._date = date ;
-    this._email = email ;
-    this._group = group ;
-  }
+
 
 }

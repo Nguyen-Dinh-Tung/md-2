@@ -15,7 +15,7 @@ class Student {
     set name(value) {
         this._name = value;
     }
-    get age() {
+    getAge() {
         return this._age;
     }
     set age(value) {

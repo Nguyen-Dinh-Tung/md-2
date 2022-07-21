@@ -23,52 +23,60 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const Constant_1 = require("./Constant");
 const student_1 = require("./student");
 const StudentManager_1 = require("./StudentManager");
 const rl = __importStar(require("readline-sync"));
 //  create
 let choice = -1;
-let listStudent = new StudentManager_1.StudentManager();
+let appManager = new StudentManager_1.StudentManager();
 let app = rl.question;
-var OptionNumber;
-(function (OptionNumber) {
-    OptionNumber[OptionNumber["OPTION_SHOWLISTSTUDENT_"] = 1] = "OPTION_SHOWLISTSTUDENT_";
-    OptionNumber[OptionNumber["OPTION_CREATESTUDENT_"] = 2] = "OPTION_CREATESTUDENT_";
-    OptionNumber[OptionNumber["OPTION_ADDSTUDENT_"] = 3] = "OPTION_ADDSTUDENT_";
-    OptionNumber[OptionNumber["OPTION_FINDSTUDENT_"] = 4] = "OPTION_FINDSTUDENT_";
-    OptionNumber[OptionNumber["OPTION_EXIST_"] = 0] = "OPTION_EXIST_";
-})(OptionNumber || (OptionNumber = {}));
+// run menu
 do {
     menu();
     choice = +app('Nhập lựa chọn của bạn : ');
     switch (choice) {
-        case OptionNumber.OPTION_SHOWLISTSTUDENT_:
+        case Constant_1.OptionNumber.OPTION_SHOWLISTSTUDENT_:
             showListStudent();
             break;
-        case OptionNumber.OPTION_CREATESTUDENT_:
+        case Constant_1.OptionNumber.OPTION_CREATESTUDENT_:
             createStudent();
             break;
-        case OptionNumber.OPTION_ADDSTUDENT_:
+        case Constant_1.OptionNumber.OPTION_ADDSTUDENT_:
             deleteStudent();
             break;
-        case OptionNumber.OPTION_FINDSTUDENT_:
+        case Constant_1.OptionNumber.OPTION_FINDSTUDENT_:
             findStudentByName();
+            break;
+        case Constant_1.OptionNumber.OPTION_FINDGROUP_:
+            findGroupStudent();
+            break;
+        case Constant_1.OptionNumber.OPTION_SORTBYAGE_:
+            sortStudentByAge();
             break;
         default:
             // console.log('')
             console.log('\nVui lòng nhập lại lựa chọn\n');
     }
-} while (choice != OptionNumber.OPTION_EXIST_);
+} while (choice != Constant_1.OptionNumber.OPTION_EXIST_);
 // handle manager
+function sortStudentByAge() {
+    appManager.sortStudentByAge();
+}
+function findGroupStudent() {
+    console.log('5. -- Tìm group ');
+    let nameGroup = app('Nhập tên group');
+    appManager.findStudentByGroup(nameGroup);
+}
 function findStudentByName() {
     console.log('-- Tìm sinh viên');
     let name = app('Nhập tên để tìm sinh viên');
-    listStudent.findStudentByName(name);
+    appManager.findStudentByName(name);
 }
 function deleteStudent() {
     console.log('-- Xóa sinh viên');
     let name = app('Nhập vào tên để xóa sinh viên');
-    listStudent.deleteStudent(name);
+    appManager.deleteStudent(name);
 }
 function createStudent() {
     console.log('-- Tạo sinh viên mới');
@@ -78,17 +86,19 @@ function createStudent() {
     let email = app('Nhập email');
     let group = app('Nhập group');
     let student = new student_1.Student(name, age, date, email, group);
-    listStudent.addStudent(student);
+    appManager.addStudent(student);
 }
 function showListStudent() {
     console.log('-- Danh sách sinh viên');
-    listStudent.showListStudent();
+    appManager.showListStudent();
 }
 function menu() {
     console.log('Quản lý sinh viên ');
     console.log('1. Hiển thị danh sách sinh viên ');
     console.log('2. Tạo thông tin sinh viên');
-    console.log('3. Thêm sinh viên ');
-    console.log('4. Tìm sinh viên ');
+    console.log('3. Xóa sinh viên ');
+    console.log('4. Tìm tên sinh viên ');
+    console.log('5. Tìm group ');
+    console.log('6. Hiển thị danh sách sinh viên sắp xếp theo tuổi');
     console.log('0. Thoát');
 }
