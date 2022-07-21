@@ -50,16 +50,24 @@ export class StudentManager {
   }
 
   sortStudentByAge(){
+
     for(let i = 0 ; i < this.listStudent.length ; i++){
       for(let j = 0 ; j < this.listStudent.length - i - 1 ; j++){
+
         if(this.listStudent[j].getAge() > this.listStudent[j + 1].getAge()){
+
           let temp = this.listStudent[j]
           this.listStudent[j] = this.listStudent[j + 1]
           this.listStudent[j + 1] = temp
+
         }
       }
     }
     console.table(this.listStudent)
+  }
+
+  editStudent(student: Student , index : number): void{
+    this.listStudent[index] = student ;
   }
 
 }

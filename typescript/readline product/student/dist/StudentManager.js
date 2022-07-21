@@ -56,5 +56,8 @@ class StudentManager {
         }
         console.table(this.listStudent);
     }
+    editStudent(student, index) {
+        this.listStudent[index] = student;
+    }
 }
 exports.StudentManager = StudentManager;

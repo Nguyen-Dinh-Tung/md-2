@@ -9,5 +9,6 @@ var OptionNumber;
     OptionNumber[OptionNumber["OPTION_FINDSTUDENT_"] = 4] = "OPTION_FINDSTUDENT_";
     OptionNumber[OptionNumber["OPTION_FINDGROUP_"] = 5] = "OPTION_FINDGROUP_";
     OptionNumber[OptionNumber["OPTION_SORTBYAGE_"] = 6] = "OPTION_SORTBYAGE_";
+    OptionNumber[OptionNumber["OPTION_EDITSTUDENT_"] = 7] = "OPTION_EDITSTUDENT_";
     OptionNumber[OptionNumber["OPTION_EXIST_"] = 0] = "OPTION_EXIST_";
 })(OptionNumber = exports.OptionNumber || (exports.OptionNumber = {}));
