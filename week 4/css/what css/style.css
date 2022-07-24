@@ -1,0 +1,11 @@
+.name{
+  text-align: center;
+}
+
+.lastName{
+  direction: ltr;
+}
+
+.age{
+  word-spacing: 10px;
+}
