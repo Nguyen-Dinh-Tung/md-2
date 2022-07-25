@@ -1,16 +1,17 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CstMenuMain = exports.CstAdminEdit = exports.CstAdmin = exports.CstCustomer = exports.PRICEELECTRIC = void 0;
+exports.getTime = exports.CstMenuMain = exports.CstAdminEdit = exports.CstAdmin = exports.CstCustomer = exports.interest = exports.PRICEELECTRIC = void 0;
 exports.PRICEELECTRIC = 3000;
+exports.interest = 0.0013;
 var CstCustomer;
 (function (CstCustomer) {
     CstCustomer[CstCustomer["OPTION_EXIST"] = 0] = "OPTION_EXIST";
     CstCustomer[CstCustomer["OPTION_RENDER_INFO_CUSTOMER"] = 1] = "OPTION_RENDER_INFO_CUSTOMER";
-    // OPTION_CREATE_CUSTOMER = 2,
-    // OPTION_DELETE_CUSTOMER = 3,
-    // OPTION_EDIT_CUSTOMER = 4,
-    // OPTION_UPDATE_MONEY = 5,
-    // OPTION_SORT_CUSTOMER = 6,
+    CstCustomer[CstCustomer["OPTION_GET_MONEY"] = 2] = "OPTION_GET_MONEY";
+    CstCustomer[CstCustomer["OPTION_EDIT_PASS"] = 3] = "OPTION_EDIT_PASS";
+    CstCustomer[CstCustomer["OPTION_CALC_INTEREST"] = 4] = "OPTION_CALC_INTEREST";
+    CstCustomer[CstCustomer["OPTION_TRANSFERS"] = 5] = "OPTION_TRANSFERS";
+    CstCustomer[CstCustomer["OPTION_TRANSFERS_HISTORY"] = 6] = "OPTION_TRANSFERS_HISTORY";
 })(CstCustomer = exports.CstCustomer || (exports.CstCustomer = {}));
 var CstAdmin;
 (function (CstAdmin) {
@@ -20,7 +21,9 @@ var CstAdmin;
     CstAdmin[CstAdmin["OPTION_DELETE_CUSTOMER"] = 3] = "OPTION_DELETE_CUSTOMER";
     CstAdmin[CstAdmin["OPTION_EDIT_CUSTOMER"] = 4] = "OPTION_EDIT_CUSTOMER";
     CstAdmin[CstAdmin["OPTION_UPDATE_MONEY"] = 5] = "OPTION_UPDATE_MONEY";
-    CstAdmin[CstAdmin["OPTION_SORT_CUSTOMER"] = 6] = "OPTION_SORT_CUSTOMER";
+    CstAdmin[CstAdmin["OPTION_GET_MONEY"] = 6] = "OPTION_GET_MONEY";
+    CstAdmin[CstAdmin["OPTION_SORT_CUSTOMER"] = 7] = "OPTION_SORT_CUSTOMER";
+    CstAdmin[CstAdmin["OPTION_TRANSFERS_HISTORY"] = 8] = "OPTION_TRANSFERS_HISTORY";
 })(CstAdmin = exports.CstAdmin || (exports.CstAdmin = {}));
 var CstAdminEdit;
 (function (CstAdminEdit) {
@@ -43,3 +46,9 @@ var CstMenuMain;
     // OPTION_PAY_BILL = 5,
     // OPTION_UPDATE_AMOUNT_ELECTRIC = 6,
 })(CstMenuMain = exports.CstMenuMain || (exports.CstMenuMain = {}));
+function getTime() {
+    let date = new Date();
+    let newDate = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}  ${date.getDay()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+    return newDate;
+}
+exports.getTime = getTime;

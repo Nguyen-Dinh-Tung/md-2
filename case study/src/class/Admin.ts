@@ -1,3 +1,5 @@
+import { getTime } from "./Constant";
+import { TransfersHistory } from "./TransfersHistory";
 import { User } from "./User";
 
 export class Admin {
@@ -18,23 +20,10 @@ export class Admin {
     pass : string ,
     ):void{
 
-    this.listUser.forEach((element)=>{
-        element.user = user ;
-        element.pass = pass ;
-      })
     let users = new User(_name,_age,_email,idCard,_phone)
-    let fullInfo = {
-      name: users.name,
-      age: users.age,
-      email: users.email,
-      idCard: users.idCard,
-      phone: users.phone,
-      user: user,
-      pass: pass,
-      user_money: users.money,
-    }
-
-      this.listUser.push(fullInfo)
+    users.user = user
+    users.pass = pass
+      this.listUser.push(users)
 
   }
   deleteCustomer(index: number):void{
@@ -60,6 +49,7 @@ export class Admin {
   setAdminPass(pass: string): void{
     this.pass = pass ;
   }
+
 }
 
 

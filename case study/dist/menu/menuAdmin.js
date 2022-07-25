@@ -1,10 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.questionAdmin = void 0;
+const History_1 = require("./../handle/History");
 const Constant_1 = require("./../class/Constant");
 const Admin_1 = require("./../class/Admin");
 const menuAdminEditUser_1 = require("./menuAdminEditUser");
 const menu_1 = require("./menu");
+const addHistory_1 = require("../handle/addHistory");
 function questionAdmin(choice, app, CstAdmin, menuAdminEdit) {
     do {
         console.log('\n-- Trình quản lý khách hàng --\n');
@@ -26,11 +28,17 @@ function questionAdmin(choice, app, CstAdmin, menuAdminEdit) {
             case CstAdmin.OPTION_UPDATE_MONEY:
                 inputMoney(app);
                 break;
+            case CstAdmin.OPTION_GET_MONEY:
+                withDrawMoneyByUser(app);
+                break;
             case CstAdmin.OPTION_SORT_CUSTOMER:
                 sortCustomerByAge();
                 break;
             case CstAdmin.OPTION_EXIST:
                 console.log('\n-- Chào tạm biệt --\n');
+                break;
+            case CstAdmin.OPTION_TRANSFERS_HISTORY:
+                renderHistoryAdmin();
                 break;
             default:
                 console.log('\n*** ERORR Chú ý bạn đã nhập sau yêu cầu\n --');
@@ -39,21 +47,42 @@ function questionAdmin(choice, app, CstAdmin, menuAdminEdit) {
     } while (choice != CstAdmin.OPTION_EXIST);
 }
 exports.questionAdmin = questionAdmin;
+function renderHistoryAdmin() {
+    let historyAdmin = History_1.history.getListlistHistoryAdmin();
+    console.table(historyAdmin);
+}
+function withDrawMoneyByUser(app) {
+    if (isListUserLength() == true) {
+        let { flag, index } = isCustomer(app);
+        let numberMoney = +app('\n-- Nhập vào số tiền  -- :\n');
+        if (numberMoney > Admin_1.admin.listUser[index].money) {
+            flag = false;
+        }
+        while (!flag) {
+            console.log('\n-- Số tiền chuyển đi vướt quá hạn mức , vui lòng nhập lại số tiền muốn chuyển --\n');
+            numberMoney = +app('\n-- Nhập vào số tiền muốn chuyển -- :\n');
+            if (Admin_1.admin.listUser[index].money > numberMoney) {
+                flag = true;
+            }
+        }
+        if (flag) {
+            Admin_1.admin.listUser[index].getMoney(numberMoney);
+            (0, addHistory_1.addMessageHistoryAdmin)('admin', Admin_1.admin.listUser[index].name, -numberMoney);
+        }
+    }
+}
 function editCustomer(choice, app, menuAdminEdit) {
-    isListUserLength();
     if (isListUserLength() == true) {
         (0, menuAdminEditUser_1.questionAdminEdit)(choice, app, Constant_1.CstAdminEdit, menuAdminEdit);
     }
-    else {
-        console.log('\n-- Danh sách khách hàng rỗng không thể thực hiện thao tác này --\n');
-    }
 }
 function sortCustomerByAge() {
-    isListUserLength();
     if (isListUserLength() == true) {
         Admin_1.admin.listUser.sort((a, b) => {
             return a.age - b.age;
         });
+    }
+    else {
     }
 }
 function isListUserLength() {
@@ -61,31 +90,27 @@ function isListUserLength() {
     if (Admin_1.admin.listUser.length != 0) {
         flag = true;
     }
-    return flag;
-}
-function inputMoney(app) {
-    isListUserLength();
-    if (isListUserLength() == true) {
-        let { flag, index } = isCustomer(app);
-        let inputMoney = app('\n-- Nhập vào số tiền  -- :\n');
-        if (flag) {
-            Admin_1.admin.listUser[index].money = inputMoney;
-        }
-    }
     else {
         console.log('\n-- Danh sách khách hàng rỗng không thể thực hiện thao tác này --\n');
     }
+    return flag;
+}
+function inputMoney(app) {
+    if (isListUserLength() == true) {
+        let { flag, index } = isCustomer(app);
+        let inputMoney = +app('\n-- Nhập vào số tiền  -- :\n');
+        if (flag) {
+            Admin_1.admin.listUser[index].setSurplus(inputMoney);
+            (0, addHistory_1.addMessageHistoryAdmin)('admin', Admin_1.admin.listUser[index].name, inputMoney);
+        }
+    }
 }
 function deleteCustomer(app) {
-    isListUserLength();
     if (isListUserLength() == true) {
         let { flag, index } = isCustomer(app);
         if (flag) {
             Admin_1.admin.deleteCustomer(index);
         }
-    }
-    else {
-        console.log('\n-- Danh sách khách hàng rỗng không thể thực hiện thao tác này --\n');
     }
 }
 function isCustomer(app) {

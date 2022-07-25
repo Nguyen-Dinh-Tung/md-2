@@ -36,15 +36,20 @@ function customerControler(app, choice) {
     let pass = app('\n-- Nhập tên đăng nhập pass -- :\n');
     let flag = isLoginCuster(user, pass);
     let index = -1;
+    let customer;
+    ({ customer, index } = getInfoCustomer(user, pass, index));
+    if (flag) {
+        (0, menuUser_1.questionCustomer)(choice, app, Constant_1.CstCustomer, customer);
+    }
+}
+function getInfoCustomer(user, pass, index) {
     Admin_1.admin.listUser.forEach((element, id) => {
         if (element.user == user && element.pass == pass) {
             return index = id;
         }
     });
     let customer = Admin_1.admin.listUser[index];
-    if (flag) {
-        (0, menuUser_1.questionCustomer)(choice, app, Constant_1.CstCustomer, customer);
-    }
+    return { customer, index };
 }
 function adminControler(app, choice) {
     console.log('\n-- Đăng nhập admin --\n');

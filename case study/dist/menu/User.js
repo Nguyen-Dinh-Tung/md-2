@@ -33,7 +33,7 @@ class User {
         return this._phone;
     }
     set phone(_phone) {
-        this._phone = _phone;
+        this.phone = _phone;
     }
     get age() {
         return this._age;
@@ -64,10 +64,6 @@ class User {
     }
     getMoney(money) {
         this._money = this._money - money;
-    }
-    getMoneyToTransfer(money) {
-        this._money = this._money - money;
-        return money;
     }
     calcInterest(tSDay) {
         let total = this._money * Constant_1.interest * tSDay;

@@ -1,5 +1,5 @@
 import { CstCustomer } from './../class/Constant';
-import { User } from './../class/User';
+import { User } from '../class/User';
 import { Login, login } from './../class/Login';
 import { Admin, admin } from './../class/Admin';
 import { CstAdmin } from '../class/Constant';
@@ -42,17 +42,22 @@ function customerControler(app: any, choice: any) {
   let pass = app('\n-- Nhập tên đăng nhập pass -- :\n');
   let flag = isLoginCuster(user, pass);
   let index = -1 ;
-  admin.listUser.forEach((element,id) =>{
-    if(element.user == user && element.pass == pass){
-      return index  = id ;
-    }
-  })
-  let customer = admin.listUser[index]
-
+  let customer;
+  ({ customer, index } = getInfoCustomer(user, pass, index));
   if (flag) {
     questionCustomer(choice, app, CstCustomer,customer);
   }
 
+}
+
+function getInfoCustomer(user: any, pass: any, index: number) {
+  admin.listUser.forEach((element, id) => {
+    if (element.user == user && element.pass == pass) {
+      return index = id;
+    }
+  });
+  let customer = admin.listUser[index];
+  return { customer, index };
 }
 
 function adminControler(app: any, choice: any) {

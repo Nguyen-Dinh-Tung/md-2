@@ -1,14 +1,20 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.login = exports.Login = void 0;
+const User_1 = require("./User");
 const Admin_1 = require("./Admin");
 // test acount
-// let user = new User('Tùng',24,'s30.tung@gmail.com','222','0337118801')
-// admin.listUser.unshift(user)
-// admin.listUser.forEach((element) =>{
-//   element.user = 'takpaj'
-//   element.pass = 'test'
-// })
+let user = new User_1.User('Tùng', 24, 's30.tung@gmail.com', '222', '0337118801');
+let user2 = new User_1.User('linh', 24, 's30.tung@gmail.com', '222', '0337118801');
+Admin_1.admin.listUser.unshift(user);
+user.user = 'takpaj';
+user.pass = 'test';
+user.setSurplus(5000000);
+Admin_1.admin.listUser.push(user2);
+user2.user = 'linh';
+user2.pass = 'test';
+user2.setSurplus(5000000);
+//
 class Login {
     constructor() {
         this.managerLoginUser = [];

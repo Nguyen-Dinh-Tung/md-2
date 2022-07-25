@@ -14,10 +14,10 @@ export function questionAdminEdit(choice: any ,app: any ,CstAdminEdit: any,menuA
         editNameCustomer(app);
         break;
       case CstAdminEdit.OPTION_EDIT_AGE:
-        editAgeCustomer(app);
+        editEmailCustomer(app);
         break;
       case CstAdminEdit.OPTION_EDIT_EMAIL:
-        editEmailCustomer(app)
+        editAgeCustomer(app)
         break;
       case CstAdminEdit.OPTION_EDIT_PHONE:
         editPhoneCustomer(app)
@@ -78,17 +78,17 @@ function editPhoneCustomer(app: any) {
 }
 
 
-function editEmailCustomer(app: any) {
+function editAgeCustomer(app: any) {
   let { flag, index } = isCustomer(app);
-  let age = app('\n-- Nhập email mới -- :\n');
+  let age = +app('\n-- Nhập email mới -- :\n');
   if (flag) {
     admin.listUser[index].age = age;
   }
 }
 
-function editAgeCustomer(app: any) {
+function editEmailCustomer(app: any) {
   let { flag, index } = isCustomer(app);
-  let email = app('\n-- Nhập tuổi mới -- :\n');
+  let email = app('\n-- Nhập email mới -- :\n');
   if (flag) {
     admin.listUser[index].email = email;
   }

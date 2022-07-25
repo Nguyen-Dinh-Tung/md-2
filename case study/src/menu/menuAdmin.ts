@@ -1,7 +1,9 @@
+import { history } from './../handle/History';
 import { CstAdminEdit } from './../class/Constant';
 import { admin } from './../class/Admin';
 import { questionAdminEdit } from './menuAdminEditUser';
 import { menuAdmin } from './menu';
+import { addMessageHistoryAdmin } from '../handle/addHistory';
 
 export function questionAdmin(choice: any ,app: any ,CstAdmin: any,menuAdminEdit:any){
   do{
@@ -31,6 +33,10 @@ export function questionAdmin(choice: any ,app: any ,CstAdmin: any,menuAdminEdit
         inputMoney(app);
         break;
 
+      case CstAdmin.OPTION_GET_MONEY:
+        withDrawMoneyByUser(app);
+        break;
+
       case CstAdmin.OPTION_SORT_CUSTOMER:
         sortCustomerByAge();
         break;
@@ -38,7 +44,9 @@ export function questionAdmin(choice: any ,app: any ,CstAdmin: any,menuAdminEdit
       case CstAdmin.OPTION_EXIST:
         console.log('\n-- Chào tạm biệt --\n')
         break;
-
+      case CstAdmin.OPTION_TRANSFERS_HISTORY:
+        renderHistoryAdmin();
+        break ;
       default :
       console.log('\n*** ERORR Chú ý bạn đã nhập sau yêu cầu\n --')
         break;
@@ -48,21 +56,47 @@ export function questionAdmin(choice: any ,app: any ,CstAdmin: any,menuAdminEdit
 
 }
 
+function renderHistoryAdmin() {
+  let historyAdmin = history.getListlistHistoryAdmin();
+  console.table(historyAdmin);
+}
+
+function withDrawMoneyByUser(app: any) {
+  if (isListUserLength() == true) {
+    let { flag, index } = isCustomer(app);
+    let numberMoney = +app('\n-- Nhập vào số tiền  -- :\n');
+
+    if (numberMoney > admin.listUser[index].money) {
+      flag = false;
+    }
+    while (!flag) {
+      console.log('\n-- Số tiền chuyển đi vướt quá hạn mức , vui lòng nhập lại số tiền muốn chuyển --\n');
+      numberMoney = +app('\n-- Nhập vào số tiền muốn chuyển -- :\n');
+      if (admin.listUser[index].money > numberMoney) {
+        flag = true;
+      }
+    }
+
+    if (flag) {
+      admin.listUser[index].getMoney(numberMoney);
+      addMessageHistoryAdmin('admin',admin.listUser[index].name , -numberMoney)
+    }
+  }
+}
+
 function editCustomer(choice: any, app: any, menuAdminEdit: any) {
-  isListUserLength();
   if (isListUserLength() == true) {
     questionAdminEdit(choice, app, CstAdminEdit, menuAdminEdit);
-  } else {
-    console.log('\n-- Danh sách khách hàng rỗng không thể thực hiện thao tác này --\n');
   }
 }
 
 function sortCustomerByAge() {
-  isListUserLength();
   if (isListUserLength() == true) {
     admin.listUser.sort((a, b) => {
       return a.age - b.age;
     });
+  }else{
+
   }
 }
 
@@ -70,36 +104,31 @@ function isListUserLength(): boolean {
   let flag = false;
   if (admin.listUser.length != 0) {
     flag = true;
+  }else{
+    console.log('\n-- Danh sách khách hàng rỗng không thể thực hiện thao tác này --\n')
   }
   return flag ;
 }
 
 function inputMoney(app: any) {
-
-  isListUserLength();
   if (isListUserLength() == true) {
     let { flag, index } = isCustomer(app);
-    let inputMoney = app('\n-- Nhập vào số tiền  -- :\n');
+    let inputMoney = +app('\n-- Nhập vào số tiền  -- :\n');
     if (flag) {
-      admin.listUser[index].money = inputMoney;
+      admin.listUser[index].setSurplus(inputMoney)
+      addMessageHistoryAdmin('admin',admin.listUser[index].name , inputMoney)
     }
-  }else{
-    console.log('\n-- Danh sách khách hàng rỗng không thể thực hiện thao tác này --\n')
+
   }
-
-
 }
 
 function deleteCustomer(app: any) {
-  isListUserLength();
   if (isListUserLength() == true) {
 
     let { flag, index } = isCustomer(app);
     if (flag) {
       admin.deleteCustomer(index);
     }
-  }else{
-    console.log('\n-- Danh sách khách hàng rỗng không thể thực hiện thao tác này --\n')
   }
 }
 

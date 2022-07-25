@@ -3,9 +3,22 @@ export function menu(): void {
   console.log('2.-- Đăng nhập tài khoản cá nhân --\n');
   console.log('0 hoặc Enter . -- Thoát');
 }
+export function menuCustomerExtra(): void{
+  console.log('1.--  --\n');
+  console.log('2.--  --\n');
+  console.log('3.--  --\n');
+  console.log('4.--  --\n');
+  console.log('5.--  --\n');
+
+  console.log('0 hoặc Enter . -- Thoát');
+}
 export function menuCustomer(): void {
   console.log('1.-- Hiển thị thông tin cá nhân --\n');
-
+  console.log('2.-- Rút tiền --\n');
+  console.log('3.-- Thay đổi mật khẩu --\n');
+  console.log('4.-- Tính lãi --\n');
+  console.log('5.-- Chuyển tiền --\n');
+  console.log('6.-- Kiểm tra lịch sử giao dịch --\n');
 
   console.log('0 hoặc Enter . -- Thoát');
 }
@@ -16,15 +29,17 @@ export function menuAdmin(): void {
   console.log('3. -- Xóa tài khoản khách hàng --\n');
   console.log('4. -- Chỉnh sửa tài khoản khách hàng --\n');
   console.log('5. -- Nạp tiền vào tài khoản --\n');
-  console.log('6. -- Sắp xếp khách hàng theo độ tuổi --\n');
+  console.log('6. -- Rút tiền khỏi tài khoản --\n');
+  console.log('7. -- Sắp xếp khách hàng theo độ tuổi --\n');
+  console.log('8. -- Kiểm tra lịch sử giao dịch --\n');
 
   console.log('0 hoặc Enter . -- Thoát');
 }
 
 export function menuAdminEdit() {
   console.log('1.-- Chỉnh sửa tên khách hàng --\n');
-  console.log('2.-- Chỉnh sửa tuổi khách hàng --\n');
-  console.log('3. -- Chỉnh sửa email khách hàng --\n');
+  console.log('2.-- Chỉnh sửa email khách hàng --\n');
+  console.log('3. -- Chỉnh sửa tuổi khách hàng --\n');
   console.log('4. -- Chỉnh sửa số điện thoại khách hàng --\n');
   console.log('5. -- Chỉnh sửa số căn cước khách hàng --\n');
   console.log('6. -- Chỉnh sửa mật khẩu đăng nhập --\n');

@@ -12,22 +12,10 @@ class Admin {
         console.table(this.listUser);
     }
     createUser(_name, _age, _email, idCard, _phone, user, pass) {
-        this.listUser.forEach((element) => {
-            element.user = user;
-            element.pass = pass;
-        });
         let users = new User_1.User(_name, _age, _email, idCard, _phone);
-        let fullInfo = {
-            name: users.name,
-            age: users.age,
-            email: users.email,
-            idCard: users.idCard,
-            phone: users.phone,
-            user: user,
-            pass: pass,
-            user_money: users.money,
-        };
-        this.listUser.push(fullInfo);
+        users.user = user;
+        users.pass = pass;
+        this.listUser.push(users);
     }
     deleteCustomer(index) {
         this.listUser.splice(index, 1);

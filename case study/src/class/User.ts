@@ -1,3 +1,6 @@
+import { TransfersHistory } from './TransfersHistory';
+import { getTime, interest } from "./Constant";
+
 export class User {
 	private _name : string ;
     private _phone : string ;
@@ -7,7 +10,6 @@ export class User {
     private _money : number ;
     private _user : string | undefined ;
     private _pass : string | undefined ;
-
   constructor(_name : string,
               _age : number,
               _email : string,
@@ -52,7 +54,7 @@ export class User {
     }
 
     public set phone(_phone: string) {
-        this.phone = _phone;
+        this._phone = _phone;
     }
 
     public get age(): number {
@@ -84,13 +86,21 @@ export class User {
     }
     public get money(): number{
         return this._money ;
-      }
-    check(){
-        return ' check '
     }
-    // public getMoney(money : number): void{
-    //   this._money = this._money - money ;
-    //   console.log(`\nRút tiền thành công! Số dư tài khoản : ${this._money}\n`)
-    // }
+    public setSurplus(moneyInput : number){
+        this._money = this._money + moneyInput ;
+      }
+    public getMoney(money : number): void{
+      this._money = this._money - money ;
+    }
+    public getMoneyToTransfer(money:number): number{
+      this._money = this._money - money ;
+      return money
+    }
+    public calcInterest(tSDay: number): number{
+        let total = this._money * interest * tSDay
+        return total;
+    }
+
 
 }
