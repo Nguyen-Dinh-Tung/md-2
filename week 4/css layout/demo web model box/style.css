@@ -1,0 +1,24 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.app{
+  width: 1200px;
+  height: 90vh;
+  margin:  20px auto;
+  background-color: rgb(46, 97, 209);
+  padding: 30px;
+  border-radius: 20px;
+}
+
+.content{
+  height: 20vh;
+  font-size: 40px;
+  background-color: bisque;
+  border-radius: 10px;
+  margin: 50px;
+  text-align: center;
+  line-height: 20vh;
+}
