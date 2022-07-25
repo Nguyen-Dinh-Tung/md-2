@@ -1,0 +1,46 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+.menu{
+  height: 80px;
+  position: absolute;
+  width: 100%;
+  background-color: black;
+  color: white;
+  font-size: 20px;
+}
+.list-item , .item{
+  list-style: none;
+  display: inline-block;
+}
+.list-item {
+  position: relative;
+  display: inline-block;
+  height: 100%;
+}
+.list-item-product{
+  float: left;
+  height: 100%;
+  padding: 30px;
+  position: relative;
+}
+.product-item{
+  display: none;
+  position: relative;
+  padding: 20px;
+  top: 26px;
+  color: black;
+  background-color: aqua;
+}
+.list-item-product:hover{
+  background-color: rgb(140, 243, 243);
+  cursor: pointer;
+}
+.list-item-product:hover .product-item{
+  display: block;
+}
+.list-item-product:active{
+  background-color: rgb(147, 190, 240);
+}
