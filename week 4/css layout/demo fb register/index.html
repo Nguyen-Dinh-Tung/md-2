@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <div class="header">
+        <h2 class="register">Đăng ký</h2>
+        <p class="register-description">Nhanh chóng và dễ dàng.</p>
+      </div>
+      <hr />
+      <div class="form">
+        <div class="name-register mt-top-14">
+          <input
+            type="text"
+            class="name input-info-color"
+            placeholder="Họ"
+            required
+          />
+          <input
+            type="text"
+            class="name input-info-color"
+            placeholder="Tên"
+            required
+          />
+        </div>
+        <div class="mt-top-14 input-info-color">
+          <input
+            class="email-register input-info-color"
+            type="text"
+            placeholder="Số điện thoại di động hoặc email"
+          />
+        </div>
+        <div class="mt-top-14 input-info-color">
+          <input
+            class="pass-register input-info-color"
+            type="text"
+            placeholder="Nhập mật khẩu"
+          />
+        </div>
+        <div class="date">
+          <label class="description-selection">Sinh nhật</label>
+          <br />
+          <select name="day" class="option-width-height border-radius-4" id="">
+            <option value="">14</option>
+          </select>
+          <select
+            name="month"
+            class="option-width-height border-radius-4"
+            id=""
+          >
+            <option value="">02</option>
+          </select>
+          <select name="year" class="option-width-height border-radius-4" id="">
+            <option value="">1998</option>
+          </select>
+        </div>
+
+        <div class="gender">
+          <label class="description-selection">Giới tính</label>
+          <br />
+          <div class="option-gender">
+            <span
+              ><label
+                class="label-option option-width-height float-left border-radius-4"
+                for="male"
+                >Nam
+                <input
+                  type="radio"
+                  name="gender"
+                  id="male"
+                  class="margin-left-54" /></label
+            ></span>
+            <span
+              ><label
+                class="label-option option-width-height float-left border-radius-4"
+                for="female"
+                >Nữ
+                <input
+                  type="radio"
+                  name="gender"
+                  id="female"
+                  class="margin-left-54" /></label
+            ></span>
+            <span
+              ><label
+                class="label-option option-width-height float-left border-radius-4"
+                for="other"
+                >Tùy chỉnh
+                <input
+                  type="radio"
+                  name="gender"
+                  id="other"
+                  class="margin-left-12" /></label
+            ></span>
+          </div>
+        </div>
+        <div class="policy">
+          <div class="desction-register">
+            <p>
+              Người dùng dịch vụ của chúng tôi có thể đã tải thông tin liên hệ
+              của bạn lên Facebook. <a href="#">Tìm hiểu thêm.</a>
+            </p>
+          </div>
+          <div class="desction-register">
+            <p>
+              By clicking Đăng ký, you agree to our  <a href=""> Terms</a>,<a href="">Privacy Policy</a></a>
+              and <a href="">Cookies Policy.</a><p>You may receive SMS Notifications from us and can opt out any time.</p>
+            </p>
+          </div>
+        </div>
+        <div  class="btn">
+        <button class="btn-resgister" type="submit">Đăng ký</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
