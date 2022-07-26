@@ -1,0 +1,101 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+a{
+  text-decoration: none;
+}
+li {
+  list-style: none;
+}
+#nav{
+  height: 80px;
+  width: 100%;
+  background-color: black ;
+}
+#logo{
+float: left;
+height: 100%;
+margin-right: 200px;
+}
+#logo a {
+  height: 100%;
+  color: rgb(46, 45, 45);
+  display: block;
+  text-align: center;
+  font-size: 28px;
+  font-weight: 900;
+  line-height: 80px;
+  height: 100%;
+  width: 80px;
+  border-radius: 50% ;
+  background-color: white;
+  margin-left:  10px;
+}
+#logo a:hover{
+  background-color: #ccc;
+}
+#head-search{
+  height: 100%;
+  float: left;
+}
+
+#search{
+  float: left;
+  height: 100%;
+  width: 300px;
+  font-size: 20px;
+  margin-right: 40px;
+  border-radius: 10px;
+  padding-left: 6px;
+}
+
+.nav{
+  float: left;
+  height: 100%;
+}
+
+.item{
+  float: left;
+  height: 100%;
+  width: 160px;
+  text-align: center;
+}
+.item a {
+  color: white;
+  display: block;
+  height: 100%;
+  margin: 0 6px;
+  font-size: 26px;
+  line-height: 80px;
+  border-radius: 6px;
+}
+.item a:hover{
+  background-color: #ccc;
+}
+.nav-info{
+  float: left;
+  height: 100%;
+  margin-left: 240px;
+}
+.nav-info li {
+  float: left;
+  height: 100%;
+}
+.nav-info li a {
+  display: block;
+  width: 80px;
+  height: 100%;
+  background-color: white;
+  color: black;
+  margin:  0 8px;
+  font-weight: 700;
+  font-size: 20px;
+  text-align: center;
+  line-height: 80px;
+  border-radius: 50%;
+}
+.nav-info li a:hover{
+  background-color: #ccc;
+}
