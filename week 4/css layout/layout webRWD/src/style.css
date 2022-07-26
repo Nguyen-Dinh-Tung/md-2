@@ -1,0 +1,117 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+li {
+  list-style: none;
+}
+a{
+  text-decoration: none;
+}
+ul {
+  margin: 0;
+}
+
+#app{
+
+}
+
+.header{
+  height: 60px;
+  padding: 6px;
+  background-color: black;
+}
+
+.nav{
+  float: left;
+  height: 100%;
+}
+.nav li {
+  float: left;
+  height: 100%;
+}
+.nav li a {
+  color: white;
+  display: block;
+  height: 100%;
+  font-size: 30px;
+  font-weight: 600;
+  text-align: center;
+  line-height: 48px;
+  border-radius: 6px ;
+}
+.login{
+  float: left;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+.login li{
+  height: 100%;
+  display: block;
+}
+.login a {
+  display: inline-block;
+  color: white;
+  text-align: center;
+  font-size: 30px;
+  line-height: 48px;
+  height: 100%;
+  width: 100%;
+  border-radius: 6px;
+}
+.nav li a:hover ,.login a:hover{
+  background-color: rgb(141, 235, 235);
+}
+.side-left{
+  float: left;
+  background-color: antiquewhite;
+  height: 70vh;
+}
+.side-left li {
+  padding: 16px;
+}
+.side-left li a {
+  color: black;
+  font-size: 30px;
+  font-weight: 600;
+
+}
+.content{
+  float: left;
+  background-color: rgb(160, 246, 218);
+  height: 70vh;
+}
+.content p {
+  font-size: 50px;
+  text-align: center;
+  line-height: 70vh;
+}
+.side-right{
+  float: left;
+  height: 70vh;
+  background-color: beige;
+}
+.side-right p {
+  padding: 40px;
+  margin: 20px;
+  font-size: 30px;
+  text-align: center;
+  background-color: #ccc;
+  border-radius: 10px;
+}
+.side-right p:hover{
+  background-color: white;
+  cursor: pointer;
+}
+.footer{
+  background-color: #ccc;
+  height: 20vh;
+}
+.footer p{
+  font-size: 40px;
+  text-align: center;
+  line-height: 20vh;
+  font-weight: 700;
+}
