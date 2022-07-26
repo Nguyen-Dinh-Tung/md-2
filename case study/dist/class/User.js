@@ -14,6 +14,9 @@ class User {
     get user() {
         return this._user;
     }
+    getUser() {
+        return this._user;
+    }
     set user(_user) {
         this._user = _user;
     }

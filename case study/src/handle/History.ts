@@ -19,8 +19,8 @@ export class History {
 
   getListHistoryCustomer(userLogin : string){
     let messageHistory : TransfersHistory[] = [] ;
-    this.listHistoryCustomer.forEach(element => {
-      if(element.getName() ==  userLogin){
+    this.listHistoryAdmin.forEach(element => {
+      if(element.getName() ==  userLogin || element.getNameTake() ==  userLogin){
         messageHistory.push(element)
       }
 

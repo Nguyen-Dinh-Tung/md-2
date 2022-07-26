@@ -7,6 +7,7 @@ const Admin_1 = require("./../class/Admin");
 const menuAdminEditUser_1 = require("./menuAdminEditUser");
 const menu_1 = require("./menu");
 const addHistory_1 = require("../handle/addHistory");
+const regex_1 = require("../handle/regex");
 function questionAdmin(choice, app, CstAdmin, menuAdminEdit) {
     do {
         console.log('\n-- Trình quản lý khách hàng --\n');
@@ -67,7 +68,7 @@ function withDrawMoneyByUser(app) {
         }
         if (flag) {
             Admin_1.admin.listUser[index].getMoney(numberMoney);
-            (0, addHistory_1.addMessageHistoryAdmin)('admin', Admin_1.admin.listUser[index].name, -numberMoney);
+            (0, addHistory_1.addMessageHistoryAdmin)('admin', Admin_1.admin.listUser[index].getUser(), -numberMoney);
         }
     }
 }
@@ -101,7 +102,7 @@ function inputMoney(app) {
         let inputMoney = +app('\n-- Nhập vào số tiền  -- :\n');
         if (flag) {
             Admin_1.admin.listUser[index].setSurplus(inputMoney);
-            (0, addHistory_1.addMessageHistoryAdmin)('admin', Admin_1.admin.listUser[index].name, inputMoney);
+            (0, addHistory_1.addMessageHistoryAdmin)('admin', Admin_1.admin.listUser[index].getUser(), inputMoney);
         }
     }
 }
@@ -114,7 +115,7 @@ function deleteCustomer(app) {
     }
 }
 function isCustomer(app) {
-    let index = +app('\n-- Nhập vị trí cần xóa -- :\n');
+    let index = +app('\n-- Nhập vị trí  -- :\n');
     let flag = false;
     if (Admin_1.admin.isCustomer(index) == true) {
         flag = true;
@@ -132,11 +133,43 @@ function createNewCustomer(app) {
     console.log('\n-- Tạo mới khách hàng --\n');
     let name = app('\n-- Nhập tên khách hàng -- :\n');
     let phone = app('\n-- Nhập số điện thoại -- :\n');
+    while ((0, regex_1.isPhoneNumber)(phone) == false) {
+        console.log('\n-- Vui lòng nhập đúng kiểu số điện thoại --\n');
+        phone = app('\n-- Nhập số điện thoại -- :\n');
+    }
     let age = +app('\n-- Nhập tuổi -- :\n');
     let email = app('\n-- Nhập email -- :\n');
+    while ((0, regex_1.isEmail)(email) == false) {
+        console.log('\n-- Vui lòng nhập đúng kiểu email --\n');
+        email = app('\n-- Nhập email -- :\n');
+    }
     let idCard = app('\n-- Nhập căn cước -- :\n');
+    while ((0, regex_1.isIdCard)(idCard) == false) {
+        console.log('\n-- Vui lòng nhập đúng kiểu căn cước công dân --\n');
+        idCard = app('\n-- Nhập căn cước -- :\n');
+    }
     let user = app('\n-- Nhập tên đăng nhập tài khoản -- :\n');
+    let flag = true;
+    Admin_1.admin.getListUserLogin().forEach((element) => {
+        if (user == element) {
+            flag = false;
+        }
+    });
+    while (!flag) {
+        console.log('\n-- Tên đăng nhập trùng nhau ! Vui lòng nhập tên khác --\n');
+        user = app('\n-- Nhập tên đăng nhập tài khoản -- :\n');
+        flag = true;
+        Admin_1.admin.getListUserLogin().forEach((element) => {
+            if (user == element || (0, regex_1.isRegisterUser)(user) == false) {
+                flag = false;
+            }
+        });
+    }
     let pass = app('\n-- Nhập mật khẩu tài khoản -- :\n');
+    while ((0, regex_1.isRegisterPass)(pass) == false) {
+        console.log('\n-- Vui lòng nhập lại pass --\n');
+        pass = app('\n-- Nhập mật khẩu tài khoản -- :\n');
+    }
     Admin_1.admin.createUser(name, age, email, idCard, phone, user, pass);
     console.log('\n-- Đăng ký thành công --\n');
 }

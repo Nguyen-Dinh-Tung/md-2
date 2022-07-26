@@ -6,6 +6,7 @@ class Admin {
     constructor() {
         this.listUser = [];
         this.user = 'admin';
+        this.listUserLogin = [];
         this.pass = '123123';
     }
     renderListUser() {
@@ -38,6 +39,12 @@ class Admin {
     }
     setAdminPass(pass) {
         this.pass = pass;
+    }
+    getListUserLogin() {
+        this.listUser.forEach((element) => {
+            this.listUserLogin.push(element.getUser());
+        });
+        return this.listUserLogin;
     }
 }
 exports.Admin = Admin;

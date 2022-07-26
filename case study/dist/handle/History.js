@@ -19,8 +19,8 @@ class History {
     }
     getListHistoryCustomer(userLogin) {
         let messageHistory = [];
-        this.listHistoryCustomer.forEach(element => {
-            if (element.getName() == userLogin) {
+        this.listHistoryAdmin.forEach(element => {
+            if (element.getName() == userLogin || element.getNameTake() == userLogin) {
                 messageHistory.push(element);
             }
         });

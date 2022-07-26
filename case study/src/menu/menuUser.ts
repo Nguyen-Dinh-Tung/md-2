@@ -46,7 +46,7 @@ export function questionCustomer(choice: any ,app: any ,CstCustomer: any,custome
 
 
 function renderHistoryStranfers(customer: any) {
-  let historyCustimer = history.getListHistoryCustomer(customer.name);
+  let historyCustimer = history.getListHistoryCustomer(customer.getUser());
   console.table(historyCustimer);
 }
 
@@ -79,11 +79,11 @@ function transfersMoney(app: any, customer: any) {
     }
   }
   let sentMoney = customer.getMoneyToTransfer(moneyTransferred);
-
-  addMessageHistory(customer, nameLogin, moneyTransferred);
+  console.log(customer.getUser() + ' check')
+  addMessageHistory(customer.getUser(), nameLogin, moneyTransferred);
 
   // addMessageHistoryAdmin(history,admin, customer, nameLogin, moneyTransferred);
-  // admin.listUser[id].setSurplus(sentMoney);
+  admin.listUser[id].setSurplus(sentMoney);
 }
 
 
@@ -152,7 +152,7 @@ function getMoney(app: any, customer: any) {
     customer.getMoney(money);
     console.log('\n-- Rút tiền thành công --\n');
   }
-  addMessageHistory(customer,input, -money);
+  addMessageHistory(customer.getUser(),input, -money);
 }
 
 function showInfoCustomer(customer: any) {

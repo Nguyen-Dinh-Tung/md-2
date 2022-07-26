@@ -28,7 +28,9 @@ export class User {
     public get user():any {
         return this._user;
     }
-
+    public getUser(){
+        return this._user
+    }
     public set user(_user: string) {
         this._user = _user;
     }

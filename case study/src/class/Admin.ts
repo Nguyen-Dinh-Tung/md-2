@@ -5,6 +5,7 @@ import { User } from "./User";
 export class Admin {
   public listUser : any [] = []
   private user : string  = 'admin' ;
+  public listUserLogin : string [] = [] ;
   private pass : string = '123123' ;
   renderListUser():void{
     console.table(this.listUser);
@@ -48,6 +49,12 @@ export class Admin {
   }
   setAdminPass(pass: string): void{
     this.pass = pass ;
+  }
+  getListUserLogin(): string[]{
+    this.listUser.forEach((element) =>{
+      this.listUserLogin.push(element.getUser())
+    })
+    return this.listUserLogin
   }
 
 }

@@ -40,7 +40,7 @@ function questionCustomer(choice, app, CstCustomer, customer) {
 }
 exports.questionCustomer = questionCustomer;
 function renderHistoryStranfers(customer) {
-    let historyCustimer = History_1.history.getListHistoryCustomer(customer.name);
+    let historyCustimer = History_1.history.getListHistoryCustomer(customer.getUser());
     console.table(historyCustimer);
 }
 function transfersMoney(app, customer) {
@@ -66,9 +66,10 @@ function transfersMoney(app, customer) {
         }
     }
     let sentMoney = customer.getMoneyToTransfer(moneyTransferred);
-    (0, addHistory_1.addMessageHistory)(customer, nameLogin, moneyTransferred);
+    console.log(customer.getUser() + ' check');
+    (0, addHistory_1.addMessageHistory)(customer.getUser(), nameLogin, moneyTransferred);
     // addMessageHistoryAdmin(history,admin, customer, nameLogin, moneyTransferred);
-    // admin.listUser[id].setSurplus(sentMoney);
+    Admin_1.admin.listUser[id].setSurplus(sentMoney);
 }
 function findNameLogin(nameLogin, flag, id) {
     Admin_1.admin.listUser.forEach((element, index) => {
@@ -129,7 +130,7 @@ function getMoney(app, customer) {
         customer.getMoney(money);
         console.log('\n-- Rút tiền thành công --\n');
     }
-    (0, addHistory_1.addMessageHistory)(customer, input, -money);
+    (0, addHistory_1.addMessageHistory)(customer.getUser(), input, -money);
 }
 function showInfoCustomer(customer) {
     let infoCustomer = {

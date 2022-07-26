@@ -21,4 +21,7 @@ export class TransfersHistory {
   getName(){
     return this.name ;
   }
+  getNameTake(){
+    return this.nameTake;
+  }
 }
