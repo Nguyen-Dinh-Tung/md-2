@@ -1,0 +1,29 @@
+*{
+  box-sizing: border-box;
+}
+
+
+
+
+/* mobile */
+@media (max-width: 739px) {
+  .Box{
+    margin-bottom: 6px;
+  }
+}
+
+/* table */
+@media (min-width: 740px) and (max-width: 1023px){
+  .Box{
+    margin-bottom: 12px;
+  }
+}
+/* PC medium resolution > */
+@media (min-width: 1113px){
+
+}
+/* Pc */
+
+@media (min-width: 1024px) and (max-width: 1239px){
+
+}
