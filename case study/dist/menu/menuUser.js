@@ -4,6 +4,7 @@ exports.questionCustomer = void 0;
 const addHistory_1 = require("../handle/addHistory");
 const History_1 = require("../handle/History");
 const Admin_1 = require("./../class/Admin");
+const extraMenuUser_1 = require("./extraMenuUser");
 const menu_1 = require("./menu");
 function questionCustomer(choice, app, CstCustomer, customer) {
     do {
@@ -28,6 +29,9 @@ function questionCustomer(choice, app, CstCustomer, customer) {
                 break;
             case CstCustomer.OPTION_TRANSFERS_HISTORY:
                 renderHistoryStranfers(customer);
+                break;
+            case CstCustomer.OPTION_OTHER:
+                (0, extraMenuUser_1.questionExtra)(choice, app, customer);
                 break;
             case CstCustomer.OPTION_EXIST:
                 console.log('\n-- Chào tạm biệt --\n');

@@ -41,6 +41,9 @@ export function questionAdmin(choice: any ,app: any ,CstAdmin: any,menuAdminEdit
       case CstAdmin.OPTION_SORT_CUSTOMER:
         sortCustomerByAge();
         break;
+      case CstAdmin.OPTION_FIND_CUSTOMER:
+        findUserByNameLogin(app);
+        break;
 
       case CstAdmin.OPTION_EXIST:
         console.log('\n-- Chào tạm biệt --\n')
@@ -57,6 +60,15 @@ export function questionAdmin(choice: any ,app: any ,CstAdmin: any,menuAdminEdit
 
 }
 
+function findUserByNameLogin(app: any) {
+  let nameLogin = app('\n-- Điền tên đăng nhập cần tìm -- :\n');
+  if(admin.findIdByUser(nameLogin) == -1){
+    console.log('\n-- Tên đăng nhập không tồn tại --\n')
+  }else{
+    console.table(admin.findUserByNameLogin(nameLogin))
+  }
+}
+
 function renderHistoryAdmin() {
   let historyAdmin = history.getListlistHistoryAdmin();
   console.table(historyAdmin);
@@ -67,13 +79,13 @@ function withDrawMoneyByUser(app: any) {
     let { flag, index } = isCustomer(app);
     let numberMoney = +app('\n-- Nhập vào số tiền  -- :\n');
 
-    if (numberMoney > admin.listUser[index].money) {
+    if (numberMoney >= admin.listUser[index].money) {
       flag = false;
     }
     while (!flag) {
-      console.log('\n-- Số tiền chuyển đi vướt quá hạn mức , vui lòng nhập lại số tiền muốn chuyển --\n');
+      console.log('\n-- Số tiền chuyển đi vướt quá hạn mức , vui lòng nhập lại số tiền muốn rút --\n');
       numberMoney = +app('\n-- Nhập vào số tiền muốn chuyển -- :\n');
-      if (admin.listUser[index].money > numberMoney) {
+      if (admin.listUser[index].money >= numberMoney) {
         flag = true;
       }
     }
@@ -125,7 +137,6 @@ function inputMoney(app: any) {
 
 function deleteCustomer(app: any) {
   if (isListUserLength() == true) {
-
     let { flag, index } = isCustomer(app);
     if (flag) {
       admin.deleteCustomer(index);
@@ -140,8 +151,8 @@ function isCustomer(app: any) {
     flag = true;
   }
   while (!flag) {
-    console.log('\n-- Vui lòng nhập chính xác vị trí cần chỉnh sửa --\n');
-    index = +app('\n-- Nhập vị trí cần chỉnh sửa -- :\n');
+    console.log('\n-- Vui lòng nhập chính xác vị trí --\n');
+    index = +app('\n-- Nhập vị trí -- :\n');
     if (admin.isCustomer(index) == true) {
       flag = true;
     }
@@ -159,6 +170,10 @@ function createNewCustomer(app: any) {
     phone = app('\n-- Nhập số điện thoại -- :\n');
   }
   let age = +app('\n-- Nhập tuổi -- :\n');
+  while(age <= 0 || age > 120){
+    console.log('\n-- Số nhập tuổi sai , vui lòng nhập từ 1 - 120 tuổi  --\n')
+    age = +app('\n-- Nhập tuổi -- :\n');
+  }
   let email = app('\n-- Nhập email -- :\n');
   while(isEmail(email) == false){
     console.log('\n-- Vui lòng nhập đúng kiểu email --\n')
@@ -170,6 +185,10 @@ function createNewCustomer(app: any) {
     idCard = app('\n-- Nhập căn cước -- :\n');
   }
   let user = app('\n-- Nhập tên đăng nhập tài khoản -- :\n');
+  while(isRegisterUser(user) == false){
+    console.log('\n-- Tên đăng nhập sai định dạng!--\n')
+    user = app('\n-- Nhập tên đăng nhập tài khoản -- :\n');
+  }
   let flag = true;
   admin.getListUserLogin().forEach((element)=>{
     if(user == element){
@@ -177,18 +196,24 @@ function createNewCustomer(app: any) {
     }
   })
   while(!flag){
-    console.log('\n-- Tên đăng nhập trùng nhau ! Vui lòng nhập tên khác --\n')
+    console.log('\n-- Tên đăng nhập trùng nhau !--\n')
     user = app('\n-- Nhập tên đăng nhập tài khoản -- :\n');
+    if(isRegisterUser(user) == false){
+      console.log('\n-- Tên đăng nhập sai định dạng!--\n')
+      user = app('\n-- Nhập tên đăng nhập tài khoản -- :\n');
+    }
     flag = true ;
     admin.getListUserLogin().forEach((element)=>{
-      if(user == element || isRegisterUser(user) == false){
+      if(user == element){
         flag = false ;
       }
     })
+
   }
+
   let pass = app('\n-- Nhập mật khẩu tài khoản -- :\n');
   while(isRegisterPass(pass)== false){
-    console.log('\n-- Vui lòng nhập lại pass --\n')
+    console.log('\n-- Vui lòng nhập lại pass gồm 8 kí tự bắt đầu bằng chữ --\n')
     pass = app('\n-- Nhập mật khẩu tài khoản -- :\n');
   }
   admin.createUser(name, age, email, idCard, phone, user, pass);

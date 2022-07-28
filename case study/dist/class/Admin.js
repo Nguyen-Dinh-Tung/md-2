@@ -46,6 +46,26 @@ class Admin {
         });
         return this.listUserLogin;
     }
+    findIdByUser(nameLogin) {
+        let id = -1;
+        this.listUser.forEach((element, index) => {
+            if (element.getUser() == nameLogin) {
+                id = index;
+            }
+        });
+        return id;
+    }
+    findUserByNameLogin(nameLogin) {
+        let index = this.findIdByUser(nameLogin);
+        let listUser = [];
+        if (index != -1) {
+            listUser.push(this.listUser[index]);
+        }
+        else {
+            console.log('\n-- Tên đăng nhập không tồn tại --\n');
+        }
+        return listUser;
+    }
 }
 exports.Admin = Admin;
 //  create Admin

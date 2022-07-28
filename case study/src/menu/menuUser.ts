@@ -1,7 +1,9 @@
+import { CstCustomerExtra } from '../class/Constant';
 import { addMessageHistory } from '../handle/addHistory';
 import { History , history } from '../handle/History';
 import { admin } from './../class/Admin';
-import { menuCustomer } from "./menu";
+import { questionExtra } from './extraMenuUser';
+import { menuCustomer, menuCustomerExtra } from "./menu";
 
 export function questionCustomer(choice: any ,app: any ,CstCustomer: any,customer: any){
   do{
@@ -29,7 +31,9 @@ export function questionCustomer(choice: any ,app: any ,CstCustomer: any,custome
       case CstCustomer.OPTION_TRANSFERS_HISTORY:
         renderHistoryStranfers(customer);
       break ;
-
+      case CstCustomer.OPTION_OTHER:
+        questionExtra(choice ,app,customer)
+      break ;
       case CstCustomer.OPTION_EXIST:
         console.log('\n-- Chào tạm biệt --\n')
         break;

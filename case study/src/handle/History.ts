@@ -23,7 +23,6 @@ export class History {
       if(element.getName() ==  userLogin || element.getNameTake() ==  userLogin){
         messageHistory.push(element)
       }
-
     });
     return messageHistory ;
   }

@@ -56,6 +56,25 @@ export class Admin {
     })
     return this.listUserLogin
   }
+  findIdByUser(nameLogin: string): number{
+    let id = -1 ;
+    this.listUser.forEach((element,index)=>{
+      if(element.getUser() == nameLogin){
+        id = index;
+      }
+    })
+    return id ;
+  }
+  findUserByNameLogin(nameLogin: string): User []{
+    let index = this.findIdByUser(nameLogin) ;
+    let listUser :User [] = [] ;
+    if(index != -1){
+      listUser.push(this.listUser[index])
+    }else{
+      console.log('\n-- Tên đăng nhập không tồn tại --\n')
+    }
+    return listUser
+  }
 
 }
 
