@@ -10,6 +10,3 @@ function addMessageHistoryAdmin(admin, nameLogin, moneyTransferred) {
     History_1.history.setTransferAdmin(admin, nameLogin, moneyTransferred);
 }
 exports.addMessageHistoryAdmin = addMessageHistoryAdmin;
-// export function addMessageHistoryAdmin(history : any,admin: any ,customer: any, nameLogin: any, moneyTransferred: number) {
-//   history.setTransfersHistory(customer.name,nameLogin, moneyTransferred);
-// }

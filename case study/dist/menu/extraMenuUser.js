@@ -14,7 +14,7 @@ function questionExtra(choice, app, customer) {
             case Constant_1.CstCustomerExtra.OPTION_INSURANCE:
                 console.log('1.-- Chọn loại bảo hiểm --\n');
                 (0, menu_1.insuranceMenu)();
-                payOne(app, customer);
+                payInsurance(app, customer);
                 break;
             // case CstCustomerExtra.OPTION_INSURANCE:
             //   console.log('3.-- Thanh toán tiền nước --\n');
@@ -32,61 +32,72 @@ function questionExtra(choice, app, customer) {
     } while (choice != Constant_1.CstCustomerExtra.OPTION_EXIST);
 }
 exports.questionExtra = questionExtra;
-function payElectric(app, customer) {
+// function payElectric(app: any, customer: any) {
+//   let selector = inputSelector(app);
+//   if (selector == CstCustomerInsura.OPTION_ONE) {
+//     console.log('\n-- Thanh toán tiền điện --\n');
+//     let selection = app('\n-- Nhập vào yes hoặc no -- :\n');
+//     switch (selection) {
+//       case CstCustomerInsuraPay.OPTION_YES_INSURACE:
+//         let id = findIdCustomer(customer);
+//         break;
+//       case CstCustomerInsuraPay.OPTION_NO_INSURACE:
+//         console.log('\n-- Thanh toán thất bại  --\n');
+//         break;
+//     }
+//   }
+// }
+function payInsurance(app, customer) {
     let selector = inputSelector(app);
-    if (selector == Constant_1.CstCustomerInsura.OPTION_ONE) {
-        console.log('\n-- Thanh toán tiền điện --\n');
-        let selection = app('\n-- Nhập vào yes hoặc no -- :\n');
-        switch (selection) {
-            case Constant_1.CstCustomerInsuraPay.OPTION_YES_INSURACE:
-                let id = findIdCustomer(customer);
-                break;
-            case Constant_1.CstCustomerInsuraPay.OPTION_NO_INSURACE:
-                console.log('\n-- Thanh toán thất bại  --\n');
-                break;
-        }
+    switch (selector) {
+        case Constant_1.CstCustomerInsura.OPTION_ONE:
+            optionInsuranceOne(app, customer);
+            break;
+        case Constant_1.CstCustomerInsura.OPTION_TWO:
+            optionInsuranceTwo(app, customer);
+            break;
+        case Constant_1.CstCustomerInsura.OPTION_THREE:
+            optionInsuranceThree(app, customer);
+            break;
     }
 }
-function payOne(app, customer) {
-    let selector = inputSelector(app);
-    if (selector == Constant_1.CstCustomerInsura.OPTION_ONE) {
-        console.log('\n-- Bạn có chắc mua bảo hiểm y tế --\n');
-        let selection = app('\n-- Nhập vào yes hoặc no -- :\n');
-        switch (selection) {
-            case Constant_1.CstCustomerInsuraPay.OPTION_YES_INSURACE:
-                let id = findIdCustomer(customer);
-                payInsuranceOne(customer, id);
-                break;
-            case Constant_1.CstCustomerInsuraPay.OPTION_NO_INSURACE:
-                console.log('\n-- Thanh toán thất bại , quý khách vui lòng chọn dịch vụ khác --\n');
-                break;
-        }
+function optionInsuranceThree(app, customer) {
+    console.log('\n-- Bạn có chắc mua bảo hiểm y tế --\n');
+    let selection = app('\n-- Nhập vào yes hoặc no -- :\n');
+    switch (selection) {
+        case Constant_1.CstCustomerInsuraPay.OPTION_YES_INSURACE:
+            let id = findIdCustomer(customer);
+            payInsuranceThree(customer, id);
+            break;
+        case Constant_1.CstCustomerInsuraPay.OPTION_NO_INSURACE:
+            console.log('\n-- Thanh toán thất bại , quý khách vui lòng chọn dịch vụ khác --\n');
+            break;
     }
-    else if (selector == Constant_1.CstCustomerInsura.OPTION_TWO) {
-        console.log('\n-- Bạn có chắc mua bảo hiểm y tế --\n');
-        let selection = app('\n-- Nhập vào yes hoặc no -- :\n');
-        switch (selection) {
-            case Constant_1.CstCustomerInsuraPay.OPTION_YES_INSURACE:
-                let id = findIdCustomer(customer);
-                payInsuranceTwo(customer, id);
-                break;
-            case Constant_1.CstCustomerInsuraPay.OPTION_NO_INSURACE:
-                console.log('\n-- Thanh toán thất bại , quý khách vui lòng chọn dịch vụ khác --\n');
-                break;
-        }
+}
+function optionInsuranceTwo(app, customer) {
+    console.log('\n-- Bạn có chắc mua bảo hiểm y tế --\n');
+    let selection = app('\n-- Nhập vào yes hoặc no -- :\n');
+    switch (selection) {
+        case Constant_1.CstCustomerInsuraPay.OPTION_YES_INSURACE:
+            let id = findIdCustomer(customer);
+            payInsuranceTwo(customer, id);
+            break;
+        case Constant_1.CstCustomerInsuraPay.OPTION_NO_INSURACE:
+            console.log('\n-- Thanh toán thất bại , quý khách vui lòng chọn dịch vụ khác --\n');
+            break;
     }
-    else if (selector == Constant_1.CstCustomerInsura.OPTION_THREE) {
-        console.log('\n-- Bạn có chắc mua bảo hiểm y tế --\n');
-        let selection = app('\n-- Nhập vào yes hoặc no -- :\n');
-        switch (selection) {
-            case Constant_1.CstCustomerInsuraPay.OPTION_YES_INSURACE:
-                let id = findIdCustomer(customer);
-                payInsuranceThree(customer, id);
-                break;
-            case Constant_1.CstCustomerInsuraPay.OPTION_NO_INSURACE:
-                console.log('\n-- Thanh toán thất bại , quý khách vui lòng chọn dịch vụ khác --\n');
-                break;
-        }
+}
+function optionInsuranceOne(app, customer) {
+    console.log('\n-- Bạn có chắc mua bảo hiểm y tế --\n');
+    let selection = app('\n-- Nhập vào yes hoặc no -- :\n');
+    switch (selection) {
+        case Constant_1.CstCustomerInsuraPay.OPTION_YES_INSURACE:
+            let id = findIdCustomer(customer);
+            payInsuranceOne(customer, id, Constant_1.CstCustomerInsuraPay);
+            break;
+        case Constant_1.CstCustomerInsuraPay.OPTION_NO_INSURACE:
+            console.log('\n-- Thanh toán thất bại , quý khách vui lòng chọn dịch vụ khác --\n');
+            break;
     }
 }
 function findIdCustomer(customer) {
@@ -98,7 +109,7 @@ function findIdCustomer(customer) {
     });
     return id;
 }
-function payInsuranceOne(customer, id) {
+function payInsuranceOne(customer, id, CstCustomerInsuraPay) {
     if (customer.money < Constant_1.CstCustomerInsuraPrice.OPTION_ONE_INSURACE) {
         console.log('\n-- Số tiền trong tài khoản của quý khách không đủ để thực hiện giao dịch --\n');
     }

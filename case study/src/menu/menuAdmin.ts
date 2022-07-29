@@ -48,9 +48,11 @@ export function questionAdmin(choice: any ,app: any ,CstAdmin: any,menuAdminEdit
       case CstAdmin.OPTION_EXIST:
         console.log('\n-- Chào tạm biệt --\n')
         break;
+
       case CstAdmin.OPTION_TRANSFERS_HISTORY:
         renderHistoryAdmin();
         break ;
+
       default :
       console.log('\n*** ERORR Chú ý bạn đã nhập sau yêu cầu\n --')
         break;
@@ -165,59 +167,94 @@ function createNewCustomer(app: any) {
   console.log('\n-- Tạo mới khách hàng --\n');
   let name = app('\n-- Nhập tên khách hàng -- :\n');
   let phone = app('\n-- Nhập số điện thoại -- :\n');
-  while(isPhoneNumber(phone) == false){
-    console.log('\n-- Vui lòng nhập đúng kiểu số điện thoại --\n')
-    phone = app('\n-- Nhập số điện thoại -- :\n');
-  }
+  phone = formatNumberPhone(phone, app);
   let age = +app('\n-- Nhập tuổi -- :\n');
-  while(age <= 0 || age > 120){
-    console.log('\n-- Số nhập tuổi sai , vui lòng nhập từ 1 - 120 tuổi  --\n')
-    age = +app('\n-- Nhập tuổi -- :\n');
-  }
+  age = formartAge(age, app);
   let email = app('\n-- Nhập email -- :\n');
-  while(isEmail(email) == false){
-    console.log('\n-- Vui lòng nhập đúng kiểu email --\n')
-    email = app('\n-- Nhập email -- :\n');
-  }
+  email = formartEmail(email, app);
   let idCard = app('\n-- Nhập căn cước -- :\n');
-  while(isIdCard(idCard) == false){
-    console.log('\n-- Vui lòng nhập đúng kiểu căn cước công dân --\n')
-    idCard = app('\n-- Nhập căn cước -- :\n');
-  }
+  idCard = formartIdCard(idCard, app);
   let user = app('\n-- Nhập tên đăng nhập tài khoản -- :\n');
-  while(isRegisterUser(user) == false){
-    console.log('\n-- Tên đăng nhập sai định dạng!--\n')
-    user = app('\n-- Nhập tên đăng nhập tài khoản -- :\n');
-  }
+  user = formartUserLogin(user, app);
   let flag = true;
-  admin.getListUserLogin().forEach((element)=>{
-    if(user == element){
-      flag = false
-    }
-  })
-  while(!flag){
-    console.log('\n-- Tên đăng nhập trùng nhau !--\n')
-    user = app('\n-- Nhập tên đăng nhập tài khoản -- :\n');
-    if(isRegisterUser(user) == false){
-      console.log('\n-- Tên đăng nhập sai định dạng!--\n')
-      user = app('\n-- Nhập tên đăng nhập tài khoản -- :\n');
-    }
-    flag = true ;
-    admin.getListUserLogin().forEach((element)=>{
-      if(user == element){
-        flag = false ;
-      }
-    })
-
-  }
+  ({ user, flag } = duplicateUserLogin(user, flag, app));
 
   let pass = app('\n-- Nhập mật khẩu tài khoản -- :\n');
-  while(isRegisterPass(pass)== false){
-    console.log('\n-- Vui lòng nhập lại pass gồm 8 kí tự bắt đầu bằng chữ --\n')
-    pass = app('\n-- Nhập mật khẩu tài khoản -- :\n');
-  }
+  pass = formartPass(pass, app);
   admin.createUser(name, age, email, idCard, phone, user, pass);
   console.log('\n-- Đăng ký thành công --\n');
+}
+
+function formartPass(pass: any, app: any) {
+  while (isRegisterPass(pass) == false) {
+    console.log('\n-- Vui lòng nhập lại pass gồm 8 kí tự bắt đầu bằng chữ --\n');
+    pass = app('\n-- Nhập mật khẩu tài khoản -- :\n');
+  }
+  return pass;
+}
+
+function duplicateUserLogin(user: any, flag: boolean, app: any) {
+  admin.getListUserLogin().forEach((element) => {
+    if (user == element) {
+      flag = false;
+    }
+  });
+  while (!flag) {
+    console.log('\n-- Tên đăng nhập trùng nhau !--\n');
+    user = app('\n-- Nhập tên đăng nhập tài khoản -- :\n');
+    if (isRegisterUser(user) == false) {
+      console.log('\n-- Tên đăng nhập sai định dạng!--\n');
+      user = app('\n-- Nhập tên đăng nhập tài khoản -- :\n');
+    }
+    flag = true;
+    admin.getListUserLogin().forEach((element) => {
+      if (user == element) {
+        flag = false;
+      }
+    });
+
+  }
+  return { user, flag };
+}
+
+function formartUserLogin(user: any, app: any) {
+  while (isRegisterUser(user) == false) {
+    console.log('\n-- Tên đăng nhập sai định dạng!--\n');
+    user = app('\n-- Nhập tên đăng nhập tài khoản -- :\n');
+  }
+  return user;
+}
+
+function formartIdCard(idCard: any, app: any) {
+  while (isIdCard(idCard) == false) {
+    console.log('\n-- Vui lòng nhập đúng kiểu căn cước công dân --\n');
+    idCard = app('\n-- Nhập căn cước -- :\n');
+  }
+  return idCard;
+}
+
+function formartEmail(email: any, app: any) {
+  while (isEmail(email) == false) {
+    console.log('\n-- Vui lòng nhập đúng kiểu email --\n');
+    email = app('\n-- Nhập email -- :\n');
+  }
+  return email;
+}
+
+function formartAge(age: number, app: any) {
+  while (age <= 0 || age > 120) {
+    console.log('\n-- Số nhập tuổi sai , vui lòng nhập từ 1 - 120 tuổi  --\n');
+    age = +app('\n-- Nhập tuổi -- :\n');
+  }
+  return age;
+}
+
+function formatNumberPhone(phone: any, app: any) {
+  while (isPhoneNumber(phone) == false) {
+    console.log('\n-- Vui lòng nhập đúng kiểu số điện thoại --\n');
+    phone = app('\n-- Nhập số điện thoại -- :\n');
+  }
+  return phone;
 }
 
 function renderListCustomer() {

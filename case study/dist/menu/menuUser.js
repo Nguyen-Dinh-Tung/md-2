@@ -52,13 +52,24 @@ function transfersMoney(app, customer) {
     let nameLogin = app('\n-- Nhập tên đăng nhập người nhận tiền  -- :\n');
     let flag = false;
     let id = -1;
+    nameLogin = findNameLoginReveci(flag, id, nameLogin, app);
+    let moneyTransferred = +app('\n-- Nhập vào số tiền muốn chuyển -- :\n');
+    ({ moneyTransferred, flag } = isSurplusCustomer(moneyTransferred, customer, flag, app));
+    let sentMoney = customer.getMoneyToTransfer(moneyTransferred);
+    console.log(customer.getUser() + ' check');
+    (0, addHistory_1.addMessageHistory)(customer.getUser(), nameLogin, moneyTransferred);
+    Admin_1.admin.listUser[id].setSurplus(sentMoney);
+}
+function findNameLoginReveci(flag, id, nameLogin, app) {
     ({ flag, id } = findNameLogin(nameLogin, flag, id));
     while (!flag) {
         console.log('\n-- Tên đăng nhập người nhận không chính xác --\n');
         nameLogin = app('\n-- Nhập tên đăng nhập người nhận tiền  -- :\n');
         ({ flag, id } = findNameLogin(nameLogin, flag, id));
     }
-    let moneyTransferred = +app('\n-- Nhập vào số tiền muốn chuyển -- :\n');
+    return nameLogin;
+}
+function isSurplusCustomer(moneyTransferred, customer, flag, app) {
     if (moneyTransferred > customer.money) {
         flag = false;
     }
@@ -69,11 +80,7 @@ function transfersMoney(app, customer) {
             flag = true;
         }
     }
-    let sentMoney = customer.getMoneyToTransfer(moneyTransferred);
-    console.log(customer.getUser() + ' check');
-    (0, addHistory_1.addMessageHistory)(customer.getUser(), nameLogin, moneyTransferred);
-    // addMessageHistoryAdmin(history,admin, customer, nameLogin, moneyTransferred);
-    Admin_1.admin.listUser[id].setSurplus(sentMoney);
+    return { moneyTransferred, flag };
 }
 function findNameLogin(nameLogin, flag, id) {
     Admin_1.admin.listUser.forEach((element, index) => {

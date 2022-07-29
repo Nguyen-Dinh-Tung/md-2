@@ -1,9 +1,8 @@
-import { CstCustomerExtra } from '../class/Constant';
 import { addMessageHistory } from '../handle/addHistory';
-import { History , history } from '../handle/History';
+import {  history } from '../handle/History';
 import { admin } from './../class/Admin';
 import { questionExtra } from './extraMenuUser';
-import { menuCustomer, menuCustomerExtra } from "./menu";
+import { menuCustomer } from "./menu";
 
 export function questionCustomer(choice: any ,app: any ,CstCustomer: any,customer: any){
   do{
@@ -61,18 +60,32 @@ function transfersMoney(app: any, customer: any) {
   let flag = false;
   let id = -1;
 
+  nameLogin = findNameLoginReveci(flag, id, nameLogin, app);
+
+  let moneyTransferred = +app('\n-- Nhập vào số tiền muốn chuyển -- :\n');
+
+  ({ moneyTransferred, flag } = isSurplusCustomer(moneyTransferred, customer, flag, app));
+  let sentMoney = customer.getMoneyToTransfer(moneyTransferred);
+  console.log(customer.getUser() + ' check')
+  addMessageHistory(customer.getUser(), nameLogin, moneyTransferred);
+  admin.listUser[id].setSurplus(sentMoney);
+}
+
+
+
+function findNameLoginReveci(flag: boolean, id: number, nameLogin: any, app: any) {
   ({ flag, id } = findNameLogin(nameLogin, flag, id));
 
   while (!flag) {
-
     console.log('\n-- Tên đăng nhập người nhận không chính xác --\n');
     nameLogin = app('\n-- Nhập tên đăng nhập người nhận tiền  -- :\n');
     ({ flag, id } = findNameLogin(nameLogin, flag, id));
   }
+  return nameLogin;
+}
 
-  let moneyTransferred = +app('\n-- Nhập vào số tiền muốn chuyển -- :\n');
-
-  if (moneyTransferred > customer.money ) {
+function isSurplusCustomer(moneyTransferred: number, customer: any, flag: boolean, app: any) {
+  if (moneyTransferred > customer.money) {
     flag = false;
   }
   while (!flag) {
@@ -82,15 +95,8 @@ function transfersMoney(app: any, customer: any) {
       flag = true;
     }
   }
-  let sentMoney = customer.getMoneyToTransfer(moneyTransferred);
-  console.log(customer.getUser() + ' check')
-  addMessageHistory(customer.getUser(), nameLogin, moneyTransferred);
-
-  // addMessageHistoryAdmin(history,admin, customer, nameLogin, moneyTransferred);
-  admin.listUser[id].setSurplus(sentMoney);
+  return { moneyTransferred, flag };
 }
-
-
 
 function findNameLogin(nameLogin: any, flag: boolean, id: number) {
   admin.listUser.forEach((element, index) => {

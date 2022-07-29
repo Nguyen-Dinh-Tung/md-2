@@ -7,6 +7,3 @@ export function addMessageHistory(customer: any, nameLogin: any, moneyTransferre
 export function addMessageHistoryAdmin(admin: any, nameLogin: any, moneyTransferred: number){
   history.setTransferAdmin(admin,nameLogin,moneyTransferred)
 }
-// export function addMessageHistoryAdmin(history : any,admin: any ,customer: any, nameLogin: any, moneyTransferred: number) {
-//   history.setTransfersHistory(customer.name,nameLogin, moneyTransferred);
-// }

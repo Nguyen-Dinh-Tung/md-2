@@ -145,31 +145,30 @@ function createNewCustomer(app) {
     console.log('\n-- Tạo mới khách hàng --\n');
     let name = app('\n-- Nhập tên khách hàng -- :\n');
     let phone = app('\n-- Nhập số điện thoại -- :\n');
-    while ((0, regex_1.isPhoneNumber)(phone) == false) {
-        console.log('\n-- Vui lòng nhập đúng kiểu số điện thoại --\n');
-        phone = app('\n-- Nhập số điện thoại -- :\n');
-    }
+    phone = formatNumberPhone(phone, app);
     let age = +app('\n-- Nhập tuổi -- :\n');
-    while (age <= 0 || age > 120) {
-        console.log('\n-- Số nhập tuổi sai , vui lòng nhập từ 1 - 120 tuổi  --\n');
-        age = +app('\n-- Nhập tuổi -- :\n');
-    }
+    age = formartAge(age, app);
     let email = app('\n-- Nhập email -- :\n');
-    while ((0, regex_1.isEmail)(email) == false) {
-        console.log('\n-- Vui lòng nhập đúng kiểu email --\n');
-        email = app('\n-- Nhập email -- :\n');
-    }
+    email = formartEmail(email, app);
     let idCard = app('\n-- Nhập căn cước -- :\n');
-    while ((0, regex_1.isIdCard)(idCard) == false) {
-        console.log('\n-- Vui lòng nhập đúng kiểu căn cước công dân --\n');
-        idCard = app('\n-- Nhập căn cước -- :\n');
-    }
+    idCard = formartIdCard(idCard, app);
     let user = app('\n-- Nhập tên đăng nhập tài khoản -- :\n');
-    while ((0, regex_1.isRegisterUser)(user) == false) {
-        console.log('\n-- Tên đăng nhập sai định dạng!--\n');
-        user = app('\n-- Nhập tên đăng nhập tài khoản -- :\n');
-    }
+    user = formartUserLogin(user, app);
     let flag = true;
+    ({ user, flag } = duplicateUserLogin(user, flag, app));
+    let pass = app('\n-- Nhập mật khẩu tài khoản -- :\n');
+    pass = formartPass(pass, app);
+    Admin_1.admin.createUser(name, age, email, idCard, phone, user, pass);
+    console.log('\n-- Đăng ký thành công --\n');
+}
+function formartPass(pass, app) {
+    while ((0, regex_1.isRegisterPass)(pass) == false) {
+        console.log('\n-- Vui lòng nhập lại pass gồm 8 kí tự bắt đầu bằng chữ --\n');
+        pass = app('\n-- Nhập mật khẩu tài khoản -- :\n');
+    }
+    return pass;
+}
+function duplicateUserLogin(user, flag, app) {
     Admin_1.admin.getListUserLogin().forEach((element) => {
         if (user == element) {
             flag = false;
@@ -189,13 +188,42 @@ function createNewCustomer(app) {
             }
         });
     }
-    let pass = app('\n-- Nhập mật khẩu tài khoản -- :\n');
-    while ((0, regex_1.isRegisterPass)(pass) == false) {
-        console.log('\n-- Vui lòng nhập lại pass gồm 8 kí tự bắt đầu bằng chữ --\n');
-        pass = app('\n-- Nhập mật khẩu tài khoản -- :\n');
+    return { user, flag };
+}
+function formartUserLogin(user, app) {
+    while ((0, regex_1.isRegisterUser)(user) == false) {
+        console.log('\n-- Tên đăng nhập sai định dạng!--\n');
+        user = app('\n-- Nhập tên đăng nhập tài khoản -- :\n');
     }
-    Admin_1.admin.createUser(name, age, email, idCard, phone, user, pass);
-    console.log('\n-- Đăng ký thành công --\n');
+    return user;
+}
+function formartIdCard(idCard, app) {
+    while ((0, regex_1.isIdCard)(idCard) == false) {
+        console.log('\n-- Vui lòng nhập đúng kiểu căn cước công dân --\n');
+        idCard = app('\n-- Nhập căn cước -- :\n');
+    }
+    return idCard;
+}
+function formartEmail(email, app) {
+    while ((0, regex_1.isEmail)(email) == false) {
+        console.log('\n-- Vui lòng nhập đúng kiểu email --\n');
+        email = app('\n-- Nhập email -- :\n');
+    }
+    return email;
+}
+function formartAge(age, app) {
+    while (age <= 0 || age > 120) {
+        console.log('\n-- Số nhập tuổi sai , vui lòng nhập từ 1 - 120 tuổi  --\n');
+        age = +app('\n-- Nhập tuổi -- :\n');
+    }
+    return age;
+}
+function formatNumberPhone(phone, app) {
+    while ((0, regex_1.isPhoneNumber)(phone) == false) {
+        console.log('\n-- Vui lòng nhập đúng kiểu số điện thoại --\n');
+        phone = app('\n-- Nhập số điện thoại -- :\n');
+    }
+    return phone;
 }
 function renderListCustomer() {
     console.log('\n-- Hiển thị danh sách khách hàng --\n');

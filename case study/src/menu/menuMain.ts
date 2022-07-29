@@ -23,7 +23,7 @@ export function questionMain(choice: any ,menu: any ,app: any ,CstMenuMain: any)
         customerControler(app, choice);
         break;
 
-      case CstMenuMain.OPTION_EXIST:
+        case CstMenuMain.OPTION_EXIST:
         console.log('\n-- Chào tạm biệt --\n')
         break;
 
